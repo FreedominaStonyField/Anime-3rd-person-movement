@@ -37,3 +37,15 @@ jump={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":32,"echo":false,"pressed":false,"keycode":32,"physical_keycode":32)]
 }
+move_walk={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":122,"echo":false,"pressed":false,"keycode":90,"physical_keycode":90)]
+}
+move_sprint={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":120,"echo":false,"pressed":false,"keycode":88,"physical_keycode":88)]
+}
+debug_toggle_menu={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":116,"echo":false,"pressed":false,"keycode":84,"physical_keycode":84)]
+}

@@ -27,6 +27,14 @@ Deliver a responsive hybrid character controller that supports both third-person
    - Finalise walk/run/sprint tiers with clean acceleration/deceleration and stamina hooks.  
    - State machine support for idle, walk, run, sprint, jump, fall, land, crouch (placeholder).  
    - Terrain material sampling for speed modifiers (mud, snow, foliage) queued for later.
+   - **Task Tracking**
+     - [ ] Define walk/run/sprint speed targets (baseline values + per-terrain multipliers).
+     - [ ] Tune acceleration/deceleration curves for each tier; document default tuning set.
+     - [ ] Implement sprint toggle/hold behaviour and expose to input map.
+     - [ ] Add stamina gating placeholder (flag + stubbed drain/regeneration).
+     - [ ] Telemetry hooks: log tier switches and average velocity for balancing.
+     - [ ] Author slope/step test scene to validate traction per tier.
+     - [ ] QA checklist: responsiveness, stop distance, camera coherence, input edge cases.
 
 2. **Camera Suite**  
    - Third-person orbit rig with anti-clip, shoulder swap, zoom.  

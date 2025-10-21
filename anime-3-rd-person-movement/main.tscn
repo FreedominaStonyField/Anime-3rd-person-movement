@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://co5hw2c76j75q" path="res://scripts/main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dr4refdhrmnug" path="res://scenes/player/PlayerController.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dtl01p44nh41h" path="res://scenes/camera/ThirdPersonCamera.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://cpjflq64wh3ja" path="res://scenes/ui/DebugHUD.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c7vuffwhcu3b2" path="res://scenes/ui/DebugOverlay.tscn" id="4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1bvp3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -84,4 +84,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="ThirdPersonCamera" parent="." instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
-[node name="DebugHUD" parent="." instance=ExtResource("4")]
+[node name="DebugOverlay" parent="." instance=ExtResource("4")]
