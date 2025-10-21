@@ -48,7 +48,7 @@ environment = SubResource("Environment_7mycd")
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.965926, 0.258819, 0, 0, 0, 1, 0.258819, -0.965926, 0, 0, 4, 0)
+transform = Transform3D(0.9659258, 0.25881895, 0, -0.15166917, 0.5660372, 0.8103076, 0.209723, -0.7826971, 0.5860046, 0, 4, 0)
 shadow_enabled = true
 shadow_normal_bias = 0.5
 
@@ -80,9 +80,6 @@ mesh = SubResource("5")
 
 [node name="Player" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-acceleration = 100.0
-air_control = 10.0
-jump_velocity = 3.0
 
 [node name="ThirdPersonCamera" parent="." instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)

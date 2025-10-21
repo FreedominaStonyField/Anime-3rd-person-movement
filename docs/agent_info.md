@@ -1,47 +1,58 @@
-# Agent Info — Anime 3rd Person Movement
+# Agent Info — Project Aurora Controller
 
 ## Quick Facts
 - Engine: Godot 4.5 (Forward Plus renderer)
-- Language: GDScript unless a specific subsystem benefits from C#
-- Target platforms: desktop PC, later adaptable to console
-- Character assets: VRM humanoid avatars with anime aesthetics
+- Language: Primarily GDScript, C# considered for perf-critical systems
+- Target platforms: Desktop PC first, console-friendly architecture
+- Character assets: Stylised anime humanoids (VRM + custom rigs)
+- Working title proposal: **Project Aurora Controller** (anime-inspired, Bethesda-style hybrid)
 
 ## Vision
-Deliver a responsive, weighty third-person controller inspired by Genshin Impact movement and combat pacing, while leveraging the flexibility of VRM models so creators can drop in custom characters without re-rigging.
+Deliver a responsive hybrid character controller that supports both third-person and first-person perspectives in the spirit of modern Bethesda RPGs, while retaining anime aesthetics and eventual fully simulated secondary motion (hair, cloth, soft-body regions).
 
 ### Player Experience Goals
-- Snappy locomotion with clear acceleration, deceleration, and short dash bursts.
-- Highly readable camera framing that keeps the avatar visible and anticipates platforming needs.
-- Context-aware animation blending (idle, jog, sprint, glide, climb) that feels expressive for anime characters.
-- Hook points for future combat, gliding, stamina, elemental abilities, and co-op extensions.
+- Seamless walk/run/sprint locomotion with terrain-dependent modifiers and tight camera control.
+- Toggleable first-person / third-person camera with configurable shoulder offset, FOV, and zoom.
+- Rich environmental interaction hooks (ladders, swimming, mounts) prepared for later phases.
+- Expressive anime presentation with space for physics-driven secondary motion (hair, cloth, body soft-body response).
 
 ## Current State Snapshot
-- Godot project scaffolded under `anime-3-rd-person-movement/`.
-- Root scene `main.tscn` is empty and ready for a world/level container.
-- No scripts or assets committed yet; movement, camera, UI, and gameplay logic remain to be implemented.
+- Modular scene structure in place (`PlayerController`, `ThirdPersonCamera`, `DebugHUD`).
+- Three-stage ground locomotion (walk/run/sprint) partially implemented; tuning in progress.
+- Basic debug HUD, reset workflow, and camera recapture logic operational.
+- Animation, stats, physics-driven secondary motion, and NPC controllers not yet implemented.
 
 ## First Implementation Milestones
-1. **Core Locomotion**  
-   - Third-person controller node with walk/run, sprint toggle, jump, short-air control, configurable acceleration curves.  
-   - Ground detection using raycasts and slope/step handling.  
-   - State machine covering Idle, Move, Sprint, Jump, Fall, Land.
+1. **Ground Locomotion Tier**  
+   - Finalise walk/run/sprint tiers with clean acceleration/deceleration and stamina hooks.  
+   - State machine support for idle, walk, run, sprint, jump, fall, land, crouch (placeholder).  
+   - Terrain material sampling for speed modifiers (mud, snow, foliage) queued for later.
 
-2. **Camera Rig**  
-   - Spring-arm or custom follow camera with collision avoidance and aim offset.  
-   - Shoulder swap and sensitivity settings exposed for input remapping.
+2. **Camera Suite**  
+   - Third-person orbit rig with anti-clip, shoulder swap, zoom.  
+   - First-person camera module sharing input with sensitivity overrides.  
+   - Smooth transition between perspectives.
 
-3. **Input System**  
-   - Use Godot's `InputMap` for keyboard/mouse and gamepad parity.  
-   - Provide an input abstraction layer so VRM gestures or future network input can reuse the same interface.
+3. **Input & Settings**  
+   - Centralised input abstraction for player/NPC control hand-off.  
+   - Debug menu to tweak movement tiers and camera parameters at runtime; save loadouts.
 
-4. **Animation Layer**  
-   - AnimationTree with blend spaces keyed to velocity and state machine transitions.  
-   - Hooks for additive upper-body blends (e.g., aiming, casting).
+4. **Stats & Resources**  
+   - `CharacterStats` resource for health, stamina, magicka placeholders.  
+   - Stamina drain/regeneration powering sprint/jump; extension-ready for combat.
 
-5. **VRM Integration**  
-   - Evaluate the `godot-vrm` add-on (https://github.com/saturday06/godot-vrm) for loading humanoid avatars.  
-   - Confirm compatibility with Godot 4.5; if issues arise, pin to the recommended commit or vendor the necessary subset.  
-   - Provide a lightweight character loader scene that pairs the VRM skeleton to the controller rig and inserts avatar-specific animation retargeting profiles.
+5. **Animation & Physics Layer (Phase 2)**  
+   - Separate animation controller fed by locomotion state data.  
+   - Plan for secondary motion: hair/cloth/breast/belly physics via skeleton constraints or soft-body proxies.  
+   - Evaluate Godot’s soft body/cloth options and third-party addons.
+
+6. **NPC & AI Integration (Phase 2)**  
+   - Convert controller into reusable pawn interface for AI.  
+   - Navigation hooks (NavAgent3D) and behaviour tree integration stub.
+
+7. **VRM & Avatar Pipeline**  
+   - VRM importer evaluation, retargeting profiles, anime-specific shading pipeline.  
+   - Document requirements for physics-ready skeletons (extra bones, constraints).
 
 ## Technical Guidelines
 - **Scene Layout**: Favor a world root scene that instantiates the player, camera rig, and temporary test environment. Use reusable sub-scenes for controller, camera, and UI.  
@@ -58,11 +69,14 @@ Deliver a responsive, weighty third-person controller inspired by Genshin Impact
 ## Asset & Animation Notes
 - Store VRM files under `res://avatars/` (git-lfs recommended once repo grows).  
 - Maintain retargeting profiles and animation resources in `res://animations/`.  
-- Use placeholder animations from Mixamo or CC0 packs until bespoke anime motions are ready.
+- Use placeholder animations from Mixamo or CC0 packs until bespoke anime motions are ready.  
+- Document requirements for secondary motion bones and physics constraints early to avoid re-rigging.
 
 ## Open Questions / Follow-Ups
-- Confirm whether glide/climb systems are part of MVP or future milestone.  
-- Decide on stamina/energy system integration for sprinting or dashing.  
-- Determine UI/UX requirements (e.g., lock-on, minimap, dialogue).
+- Finalise project rename (proposed “Project Aurora Controller” vs. legacy title).  
+- Decide when to introduce first-person camera and weapon handling.  
+- Establish roadmap for NPC parity and AI driving of the controller.  
+- Research cloth/soft-body workflow (built-in vs. plugin) and performance constraints.  
+- Define how terrain material data feeds locomotion modifiers.
 
 Keep this document updated as systems land so future agents have an accurate snapshot of project direction and conventions.

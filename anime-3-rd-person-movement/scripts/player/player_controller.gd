@@ -2,10 +2,11 @@ extends CharacterBody3D
 class_name PlayerController
 
 @export var move_speed: float = 8.0
-@export var acceleration: float = 10.0
-@export var air_control: float = 4.0
+@export var acceleration: float = 60.0
+@export var deceleration: float = 180.0
+@export var air_control: float = 20.0
 @export var jump_velocity: float = 5.0
-@export var turn_speed: float = 8.0
+@export var turn_speed: float = 10.0
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity") as float
 
@@ -36,9 +37,19 @@ func _physics_process(delta: float) -> void:
 		direction = direction.normalized()
 		target_velocity = direction * move_speed
 
-	var accel := acceleration if is_on_floor() else air_control
-	velocity.x = move_toward(velocity.x, target_velocity.x, accel * delta)
-	velocity.z = move_toward(velocity.z, target_velocity.z, accel * delta)
+	if target_velocity != Vector3.ZERO:
+		var accel_rate := acceleration if is_on_floor() else air_control
+		velocity.x = move_toward(velocity.x, target_velocity.x, accel_rate * delta)
+		velocity.z = move_toward(velocity.z, target_velocity.z, accel_rate * delta)
+	else:
+		var decel_rate := deceleration if is_on_floor() else air_control
+		velocity.x = move_toward(velocity.x, 0.0, decel_rate * delta)
+		velocity.z = move_toward(velocity.z, 0.0, decel_rate * delta)
+		if is_on_floor():
+			if abs(velocity.x) < 0.05:
+				velocity.x = 0.0
+			if abs(velocity.z) < 0.05:
+				velocity.z = 0.0
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
@@ -57,7 +68,7 @@ func reset_to_spawn() -> void:
 
 func _align_rotation_to_velocity(delta: float) -> void:
 	var horizontal_velocity := Vector3(velocity.x, 0.0, velocity.z)
-	if horizontal_velocity.length() < 0.1:
+	if horizontal_velocity.length() < 0.05:
 		return
 	var desired_yaw := atan2(horizontal_velocity.x, horizontal_velocity.z)
 	var new_yaw := lerp_angle(rotation.y, desired_yaw, clamp(turn_speed * delta, 0.0, 1.0))
