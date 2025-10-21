@@ -13,3 +13,27 @@ config_version=5
 config/name="Anime-3rd-person-movement"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+run/main_scene="res://main.tscn"
+
+[input]
+
+move_forward={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":0,"echo":false,"pressed":false,"keycode":0,"physical_keycode":87)]
+}
+move_back={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":0,"echo":false,"pressed":false,"keycode":0,"physical_keycode":83)]
+}
+move_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":0,"echo":false,"pressed":false,"keycode":0,"physical_keycode":65)]
+}
+move_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":0,"echo":false,"pressed":false,"keycode":0,"physical_keycode":68)]
+}
+jump={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"unicode":32,"echo":false,"pressed":false,"keycode":32,"physical_keycode":32)]
+}
